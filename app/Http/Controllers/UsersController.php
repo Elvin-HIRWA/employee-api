@@ -9,6 +9,48 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+        /**
+ * @OA\POST(
+ *     path="/api/register",
+ *     summary="User Registration",
+ *     tags={"Users"},
+ *     @OA\RequestBody(
+ *        required = true,
+ *        description = "Enter User's Credentials",
+ *        @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(
+ *                property="Users",
+ *                type="array",
+ *                example={{
+ *                  "name": "Elvin",
+ *                  "email": "Elhirwa3@gmail.com",
+ *                  "password": "099",
+ *                  "password_confirmation": "099",
+ *                }
+ * },
+ *                @OA\Items(
+ *                      @OA\Property(
+ *                         property="Users",
+ *                         type="string",
+ *                         example=""
+ *                      ),
+ *                     
+ *                     
+ *                      
+ *                     
+ *                ),
+ *             ),
+ *        ),
+ *     ),
+ *
+ *
+ *     @OA\Response(
+ *        response="200",
+ *        description="Successful response| when User Registered",
+ *     ),
+ * )
+ */
     public function register(Request $request){
         $fields = $request->validate([
             'name' => 'required|string',
@@ -31,6 +73,47 @@ class UsersController extends Controller
 
         return response($response, 201);
     }
+
+        /**
+ * @OA\POST(
+ *     path="/api/login",
+ *     summary="User Login",
+ *     tags={"Users"},
+ *     @OA\RequestBody(
+ *        required = true,
+ *        description = "Enter User's Credentials",
+ *        @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(
+ *                property="Users",
+ *                type="array",
+ *                example={{
+ *                  "email": "Elhirwa3@gmail.com",
+ *                  "password": "099",
+ *                }
+ * },
+ *                @OA\Items(
+ *                      @OA\Property(
+ *                         property="Users",
+ *                         type="string",
+ *                         example=""
+ *                      ),
+ *                     
+ *                     
+ *                      
+ *                     
+ *                ),
+ *             ),
+ *        ),
+ *     ),
+ *
+ *
+ *     @OA\Response(
+ *        response="200",
+ *        description="Successful response| when User successfully Login",
+ *     ),
+ * )
+ */
 
     public function login(Request $request) {
         $fields = $request->validate([
@@ -57,6 +140,28 @@ class UsersController extends Controller
 
         return response($response, 201);
     }
+
+    /**
+ * @OA\Post(
+ * path="/api/logout",
+ * summary="Logout",
+ * description="Logout user and invalidate token",
+ * operationId="authLogout",
+ * tags={"Users"},
+ * security={ {"bearer": {} }},
+ * @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *     ),
+ * @OA\Response(
+ *    response=401,
+ *    description="Returns when user is not authenticated",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Not authorized"),
+ *    )
+ * )
+ * )
+ */
 
     public function logout(Request $request) {
         auth()->user()->tokens()->delete();
