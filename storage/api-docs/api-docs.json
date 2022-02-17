@@ -1,0 +1,441 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Employees API",
+        "description": "These are APIs for all Data of Employees in Our Database",
+        "contact": {
+            "email": "elhirwa3@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/employee": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Display list of All Employees.",
+                "operationId": "aec9115c2e1b82bd5139f3ba90d8cd76",
+                "responses": {
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Client-side Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Returns when server is down",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Server Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success|Returns Employees list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Elvin"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "elhirwa3@gmail.com"
+                                            },
+                                            "code": {
+                                                "type": "string",
+                                                "example": "006"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Add an Employee",
+                "operationId": "6a4f1e0943433f32bb808e136da78430",
+                "requestBody": {
+                    "description": "Enter Credentials of an Employee",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Employees": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "Employees": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "example": [
+                                            {
+                                                "name": "Elvin",
+                                                "email": "Elhirwa3@gmail.com",
+                                                "code": "099",
+                                                "phone": "0788456732",
+                                                "post": "Developer",
+                                                "identity_number": "123445566557787877",
+                                                "age": "21"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/employee/{id}": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Display specified Employee.",
+                "operationId": "7002cd80d065e00fc43b1794ed7b4d4f",
+                "parameters": [
+                    {
+                        "name": "Employee ID",
+                        "in": "path",
+                        "description": "Specify Employee ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Client-side Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Returns when server is down",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Server Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success|Returns Employee Specified",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Elvin"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "elhirwa3@gmail.com"
+                                            },
+                                            "code": {
+                                                "type": "string",
+                                                "example": "006"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Update an Employee",
+                "description": "Update the specified Employee.",
+                "operationId": "b1f58be54bff0320d2f19085bf535278",
+                "parameters": [
+                    {
+                        "name": "Employee ID",
+                        "in": "path",
+                        "description": "Specify Employee ID to Update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Enter Credentials of an Employee you want to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "Employees": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "Employees": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "example": [
+                                            {
+                                                "name": "Elvin",
+                                                "email": "Elhirwa3@gmail.com",
+                                                "code": "099",
+                                                "phone": "0788456732",
+                                                "post": "Developer",
+                                                "identity_number": "123445566557787877",
+                                                "age": "21"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Remove the specified Employee.",
+                "operationId": "3d61663792ac65f6dbcbf97c9e90e7e2",
+                "parameters": [
+                    {
+                        "name": "Employee ID",
+                        "in": "path",
+                        "description": "Specify Employee ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Client-side Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Returns when server is down",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Server Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success|Employees Deleted"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/employee/search/{name}": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Search for Specified name.",
+                "operationId": "2b4d3cbb0b536d03579504844b163d3f",
+                "parameters": [
+                    {
+                        "name": "Employee Name",
+                        "in": "path",
+                        "description": "Specify Employee name you want to search",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Client-side Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Returns when server is down",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Server Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success|Returns Searched Employee name ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Elvin"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "elhirwa3@gmail.com"
+                                            },
+                                            "code": {
+                                                "type": "string",
+                                                "example": "006"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
