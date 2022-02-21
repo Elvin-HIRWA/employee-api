@@ -9,48 +9,82 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
-        /**
- * @OA\POST(
- *     path="/api/register",
- *     summary="User Registration",
- *     tags={"Users"},
- *     @OA\RequestBody(
- *        required = true,
- *        description = "Enter User's Credentials",
- *        @OA\JsonContent(
- *             type="object",
- *             @OA\Property(
- *                property="Users",
- *                type="array",
- *                example={{
- *                  "name": "Elvin",
- *                  "email": "Elhirwa3@gmail.com",
- *                  "password": "099",
- *                  "password_confirmation": "099",
- *                }
- * },
- *                @OA\Items(
- *                      @OA\Property(
- *                         property="Users",
- *                         type="string",
- *                         example=""
- *                      ),
- *                     
- *                     
- *                      
- *                     
- *                ),
- *             ),
- *        ),
- *     ),
- *
- *
- *     @OA\Response(
- *        response="200",
- *        description="Successful response| when User Registered",
- *     ),
- * )
- */
+/**
+     * Users Registration
+     * @OA\Post (
+     *     path="/api/register",
+     *     tags={"Users"},
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                      type="array",
+     *                       @OA\Items(
+     *                      @OA\Property(
+     *                          property="name",
+     *                          type="string"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="email",
+     *                          type="string"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="password",
+     *                          type="string"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="password_confirmation",
+     *                          type="string"
+     *                      )
+     *                     
+     *                     
+     *                     ),
+     *                 ),
+     *                 example={
+     *                     "name":"Bebe",
+     *                     "email":"example@content.com",
+     *                     "password":"ishyamba123",
+     *                     "password_confirmation":"ishyamba123",
+     *                     
+     *                }
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="id", type="number", example=1),
+     *              @OA\Property(property="name", type="string", example="name"),
+     *              @OA\Property(property="email", type="string", example="email@ab.com"),
+     *              @OA\Property(property="password", type="string", example="ishyamba123"),
+     *              @OA\Property(property="password_confirmation", type="string", example="ishyamba123"),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="invalid",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="msg", type="string", example="fail"),
+     *          )
+     *      ),
+ *  @OA\Response(
+ *    response=500,
+ *    description="Returns when there is server problem",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Server Error"),
+ *    )  
+ * ),
+ *  @OA\Response(
+     *          response=419,
+     *          description="CSRF Token mismatch",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="msg", type="string", example="fail"),
+     *          )
+     *      ),   
+     * )
+     */  
     public function register(Request $request){
         $fields = $request->validate([
             'name' => 'required|string',
@@ -74,46 +108,68 @@ class UsersController extends Controller
         return response($response, 201);
     }
 
-        /**
- * @OA\POST(
- *     path="/api/login",
- *     summary="User Login",
- *     tags={"Users"},
- *     @OA\RequestBody(
- *        required = true,
- *        description = "Enter User's Credentials",
- *        @OA\JsonContent(
- *             type="object",
- *             @OA\Property(
- *                property="Users",
- *                type="array",
- *                example={{
- *                  "email": "Elhirwa3@gmail.com",
- *                  "password": "099",
- *                }
- * },
- *                @OA\Items(
- *                      @OA\Property(
- *                         property="Users",
- *                         type="string",
- *                         example=""
- *                      ),
- *                     
- *                     
- *                      
- *                     
- *                ),
- *             ),
- *        ),
- *     ),
- *
- *
- *     @OA\Response(
- *        response="200",
- *        description="Successful response| when User successfully Login",
- *     ),
- * )
- */
+ /**
+     * Users Login
+     * @OA\Post (
+     *     path="/api/login",
+     *     tags={"Users"},
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                      type="array",
+     *                       @OA\Items(
+     *                      @OA\Property(
+     *                          property="email",
+     *                          type="string"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="password",
+     *                          type="string"
+     *                      ),
+     *                     
+     *                     
+     *                     
+     *                     ),
+     *                 ),
+     *                 example={
+     *                     "email":"example@content.com",
+     *                     "password":"ishyamba123",
+     *                     
+     *                }
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successfully Logged In",
+     *   
+     *      ),
+     * 
+     *      @OA\Response(
+     *          response=400,
+     *          description="invalid",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="msg", type="string", example="fail"),
+     *          )
+     *      ),
+ *  @OA\Response(
+ *    response=500,
+ *    description="Returns when there is server problem",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Server Error"),
+ *    )  
+ * ),
+ *  @OA\Response(
+     *          response=419,
+     *          description="CSRF Token mismatch",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="msg", type="string", example="fail"),
+     *          )
+     *      ),   
+     * )
+     */
 
     public function login(Request $request) {
         $fields = $request->validate([

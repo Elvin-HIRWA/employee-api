@@ -21,19 +21,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [UsersController::class, 'register']);
 Route::post('/login', [UsersController::class, 'login']);
+Route::get('/employee/{id}',[EmployeeController::class, 'show']);
 
-
+Route::post('/employee',[EmployeeController::class, 'store']);
+Route::get('/employee/search/{name}',[EmployeeController::class, 'search']);
+Route::put('/employee/{id}',[EmployeeController::class, 'update']);
+Route::delete('/employee/{id}',[EmployeeController::class, 'destroy']);
 //protected Routes
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    
+  
+    Route::get('/employee', [EmployeeController::class, 'index']);
 
-Route::get('/employee', [EmployeeController::class, 'index']);
-Route::post('/employee',[EmployeeController::class, 'store']);
-Route::put('/employee/{id}',[EmployeeController::class, 'update']);
-Route::delete('/employee/{id}',[EmployeeController::class, 'destroy']);
-Route::get('/employee/{id}',[EmployeeController::class, 'show']);
-Route::get('/employee/search/{name}',[EmployeeController::class, 'search']);
+
+
+
+
+
+
 Route::post('/logout', [UsersController::class, 'logout']);
 
 });

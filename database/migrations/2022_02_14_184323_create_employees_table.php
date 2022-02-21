@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->string('code');
-            $table->string('phone');
+            $table->integer('code');
+            $table->integer('phone');
             $table->string('post');
-            $table->string('identity_number');
-            $table->string('age');
+            $table->integer('identity_number');
+            $table->integer('age');
             $table->timestamps();
             // $table->foreignId('user_id')->constrained('users');
         });

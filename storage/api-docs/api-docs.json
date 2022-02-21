@@ -22,14 +22,14 @@
                 "operationId": "aec9115c2e1b82bd5139f3ba90d8cd76",
                 "responses": {
                     "401": {
-                        "description": "Returns when user is not authenticated",
+                        "description": "UnAuthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Client-side Error"
+                                            "example": "UnAuthanticated"
                                         }
                                     },
                                     "type": "object"
@@ -38,7 +38,7 @@
                         }
                     },
                     "500": {
-                        "description": "Returns when server is down",
+                        "description": "Returns when there is server problem",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -91,47 +91,153 @@
                 "tags": [
                     "Employees"
                 ],
-                "summary": "Add an Employee",
+                "summary": "Create an Employee",
                 "operationId": "6a4f1e0943433f32bb808e136da78430",
                 "requestBody": {
-                    "description": "Enter Credentials of an Employee",
-                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "Employees": {
+                                    "": {
                                         "type": "array",
                                         "items": {
                                             "properties": {
-                                                "Employees": {
-                                                    "type": "string",
-                                                    "example": ""
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "type": "string"
+                                                },
+                                                "phone": {
+                                                    "type": "string"
+                                                },
+                                                "post": {
+                                                    "type": "string"
+                                                },
+                                                "identity_number": {
+                                                    "type": "string"
+                                                },
+                                                "age": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "type": "object"
-                                        },
-                                        "example": [
-                                            {
-                                                "name": "Elvin",
-                                                "email": "Elhirwa3@gmail.com",
-                                                "code": "099",
-                                                "phone": "0788456732",
-                                                "post": "Developer",
-                                                "identity_number": "123445566557787877",
-                                                "age": "21"
-                                            }
-                                        ]
+                                        }
                                     }
                                 },
-                                "type": "object"
+                                "type": "object",
+                                "example": {
+                                    "name": "Bebe",
+                                    "email": "example@content.com",
+                                    "code": "101",
+                                    "phone": "0784562344",
+                                    "post": "Engineer",
+                                    "identity_number": "1198580045563328",
+                                    "age": "36"
+                                }
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Successful response"
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "name"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "email@ab.com"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "404"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "0798888888"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "UnAuthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "UnAuthanticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Returns when there is server problem",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Server Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "419": {
+                        "description": "CSRF Token mismatch",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -150,25 +256,68 @@
                 "operationId": "7002cd80d065e00fc43b1794ed7b4d4f",
                 "parameters": [
                     {
-                        "name": "Employee ID",
+                        "name": "id",
                         "in": "path",
-                        "description": "Specify Employee ID",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "title"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "content@gmil.com"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "808"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "089564584"
+                                        },
+                                        "post": {
+                                            "type": "string",
+                                            "example": "post"
+                                        },
+                                        "identity_number": {
+                                            "type": "string",
+                                            "example": "120859495989598"
+                                        },
+                                        "age": {
+                                            "type": "string",
+                                            "example": "40"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
                     "401": {
-                        "description": "Returns when user is not authenticated",
+                        "description": "UnAuthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Client-side Error"
+                                            "example": "UnAuthanticated"
                                         }
                                     },
                                     "type": "object"
@@ -177,7 +326,7 @@
                         }
                     },
                     "500": {
-                        "description": "Returns when server is down",
+                        "description": "Returns when there is server problem",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -188,33 +337,6 @@
                                         }
                                     },
                                     "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Success|Returns Employee Specified",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "properties": {
-                                            "name": {
-                                                "type": "string",
-                                                "example": "Elvin"
-                                            },
-                                            "email": {
-                                                "type": "string",
-                                                "example": "elhirwa3@gmail.com"
-                                            },
-                                            "code": {
-                                                "type": "string",
-                                                "example": "006"
-                                            }
-                                        },
-                                        "type": "object"
-                                    }
                                 }
                             }
                         }
@@ -231,93 +353,105 @@
                     "Employees"
                 ],
                 "summary": "Update an Employee",
-                "description": "Update the specified Employee.",
                 "operationId": "b1f58be54bff0320d2f19085bf535278",
                 "parameters": [
                     {
-                        "name": "Employee ID",
+                        "name": "id",
                         "in": "path",
-                        "description": "Specify Employee ID to Update",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     }
                 ],
                 "requestBody": {
-                    "description": "Enter Credentials of an Employee you want to update",
-                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "Employees": {
-                                        "type": "array",
-                                        "items": {
-                                            "properties": {
-                                                "Employees": {
-                                                    "type": "string",
-                                                    "example": ""
-                                                }
+                                    "": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
                                             },
-                                            "type": "object"
-                                        },
-                                        "example": [
-                                            {
-                                                "name": "Elvin",
-                                                "email": "Elhirwa3@gmail.com",
-                                                "code": "099",
-                                                "phone": "0788456732",
-                                                "post": "Developer",
-                                                "identity_number": "123445566557787877",
-                                                "age": "21"
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            },
+                                            "phone": {
+                                                "type": "string"
+                                            },
+                                            "post": {
+                                                "type": "string"
+                                            },
+                                            "identity_number": {
+                                                "type": "string"
+                                            },
+                                            "age": {
+                                                "type": "string"
                                             }
-                                        ]
+                                        },
+                                        "type": "object"
                                     }
                                 },
-                                "type": "object"
+                                "type": "object",
+                                "example": {
+                                    "name": "Bebe",
+                                    "email": "example@content.com",
+                                    "code": "101",
+                                    "phone": "0784562344",
+                                    "post": "Engineer",
+                                    "identity_number": "1198580045563328",
+                                    "age": "36"
+                                }
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Successful response"
-                    }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
-            },
-            "delete": {
-                "tags": [
-                    "Employees"
-                ],
-                "summary": "Remove the specified Employee.",
-                "operationId": "3d61663792ac65f6dbcbf97c9e90e7e2",
-                "parameters": [
-                    {
-                        "name": "Employee ID",
-                        "in": "path",
-                        "description": "Specify Employee ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "name"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "email@ab.com"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "404"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "0798888888"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
                         }
-                    }
-                ],
-                "responses": {
+                    },
                     "401": {
-                        "description": "Returns when user is not authenticated",
+                        "description": "UnAuthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Client-side Error"
+                                            "example": "UnAuthanticated"
                                         }
                                     },
                                     "type": "object"
@@ -326,7 +460,7 @@
                         }
                     },
                     "500": {
-                        "description": "Returns when server is down",
+                        "description": "Returns when there is server problem",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -341,8 +475,109 @@
                             }
                         }
                     },
+                    "419": {
+                        "description": "CSRF Token mismatch",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Delete an Employee",
+                "operationId": "3d61663792ac65f6dbcbf97c9e90e7e2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
                     "200": {
-                        "description": "Success|Employees Deleted"
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Employee deletion success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "UnAuthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "UnAuthanticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Returns when there is server problem",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Server Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "419": {
+                        "description": "CSRF Token mismatch",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -357,13 +592,11 @@
                 "tags": [
                     "Employees"
                 ],
-                "summary": "Search for Specified name.",
                 "operationId": "2b4d3cbb0b536d03579504844b163d3f",
                 "parameters": [
                     {
-                        "name": "Employee Name",
+                        "name": "name",
                         "in": "path",
-                        "description": "Specify Employee name you want to search",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -371,15 +604,59 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "title"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "content@gmil.com"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "808"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "089564584"
+                                        },
+                                        "post": {
+                                            "type": "string",
+                                            "example": "post"
+                                        },
+                                        "identity_number": {
+                                            "type": "string",
+                                            "example": "120859495989598"
+                                        },
+                                        "age": {
+                                            "type": "string",
+                                            "example": "40"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
                     "401": {
-                        "description": "Returns when user is not authenticated",
+                        "description": "UnAuthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Client-side Error"
+                                            "example": "UnAuthanticated"
                                         }
                                     },
                                     "type": "object"
@@ -388,7 +665,7 @@
                         }
                     },
                     "500": {
-                        "description": "Returns when server is down",
+                        "description": "Returns when there is server problem",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -399,33 +676,6 @@
                                         }
                                     },
                                     "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Success|Returns Searched Employee name ",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "properties": {
-                                            "name": {
-                                                "type": "string",
-                                                "example": "Elvin"
-                                            },
-                                            "email": {
-                                                "type": "string",
-                                                "example": "elhirwa3@gmail.com"
-                                            },
-                                            "code": {
-                                                "type": "string",
-                                                "example": "006"
-                                            }
-                                        },
-                                        "type": "object"
-                                    }
                                 }
                             }
                         }
@@ -443,44 +693,125 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "User Registration",
+                "summary": "Users Registration",
                 "operationId": "8e6dc75b4f735558d59b0ca144003577",
                 "requestBody": {
-                    "description": "Enter User's Credentials",
-                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "Users": {
+                                    "": {
                                         "type": "array",
                                         "items": {
                                             "properties": {
-                                                "Users": {
-                                                    "type": "string",
-                                                    "example": ""
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "password": {
+                                                    "type": "string"
+                                                },
+                                                "password_confirmation": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "type": "object"
-                                        },
-                                        "example": [
-                                            {
-                                                "name": "Elvin",
-                                                "email": "Elhirwa3@gmail.com",
-                                                "password": "099",
-                                                "password_confirmation": "099"
-                                            }
-                                        ]
+                                        }
                                     }
                                 },
-                                "type": "object"
+                                "type": "object",
+                                "example": {
+                                    "name": "Bebe",
+                                    "email": "example@content.com",
+                                    "password": "ishyamba123",
+                                    "password_confirmation": "ishyamba123"
+                                }
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Successful response| when User Registered"
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "name"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "email@ab.com"
+                                        },
+                                        "password": {
+                                            "type": "string",
+                                            "example": "ishyamba123"
+                                        },
+                                        "password_confirmation": {
+                                            "type": "string",
+                                            "example": "ishyamba123"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Returns when there is server problem",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Server Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "419": {
+                        "description": "CSRF Token mismatch",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -490,42 +821,88 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "User Login",
+                "summary": "Users Login",
                 "operationId": "be37a6d4fc7c93bf7bf2806f0c8d0bdc",
                 "requestBody": {
-                    "description": "Enter User's Credentials",
-                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "Users": {
+                                    "": {
                                         "type": "array",
                                         "items": {
                                             "properties": {
-                                                "Users": {
-                                                    "type": "string",
-                                                    "example": ""
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "password": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "type": "object"
-                                        },
-                                        "example": [
-                                            {
-                                                "email": "Elhirwa3@gmail.com",
-                                                "password": "099"
-                                            }
-                                        ]
+                                        }
                                     }
                                 },
-                                "type": "object"
+                                "type": "object",
+                                "example": {
+                                    "email": "example@content.com",
+                                    "password": "ishyamba123"
+                                }
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Successful response| when User successfully Login"
+                        "description": "successfully Logged In"
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Returns when there is server problem",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Server Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "419": {
+                        "description": "CSRF Token mismatch",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
